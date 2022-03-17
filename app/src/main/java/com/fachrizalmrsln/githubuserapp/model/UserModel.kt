@@ -1,6 +1,6 @@
 package com.fachrizalmrsln.githubuserapp.model
 
-data class User(
+data class UserModel(
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,

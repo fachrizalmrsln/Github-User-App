@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.HomePageActivity"
             android:exported="true" />
     </application>
 

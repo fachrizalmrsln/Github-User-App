@@ -6,11 +6,11 @@ import com.fachrizalmrsln.githubuserapp.base.BaseClass
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseClass() {
+class HomePageActivity : BaseClass() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home_page)
     }
 
 }

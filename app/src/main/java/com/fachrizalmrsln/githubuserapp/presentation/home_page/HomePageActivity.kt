@@ -1,4 +1,4 @@
-package com.fachrizalmrsln.githubuserapp.presentation
+package com.fachrizalmrsln.githubuserapp.presentation.home_page
 
 import android.os.Bundle
 import com.fachrizalmrsln.githubuserapp.R

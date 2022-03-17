@@ -2,7 +2,7 @@ package com.fachrizalmrsln.githubuserapp.navigation
 
 import android.app.Activity
 import android.content.Intent
-import com.fachrizalmrsln.githubuserapp.presentation.HomePageActivity
+import com.fachrizalmrsln.githubuserapp.presentation.home_page.HomePageActivity
 
 fun Activity.navigateToHome(clearStack: Boolean = false) {
     startActivity(

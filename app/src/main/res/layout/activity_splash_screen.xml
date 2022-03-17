@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/iv_app_icon"
-            android:layout_width="124dp"
-            android:layout_height="124dp"
+            android:layout_width="@dimen/dp_124"
+            android:layout_height="@dimen/dp_124"
             android:contentDescription="@string/app_icon"
             android:src="@drawable/app_icon" />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
             android:text="@string/splash_screen_title"
-            android:textSize="24sp"
+            android:textSize="@dimen/sp_24"
             android:textStyle="bold" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:text="@string/splash_screen_subtitle"
-            android:textSize="12sp" />
+            android:textSize="@dimen/sp_12" />
 
     </LinearLayout>
 

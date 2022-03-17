@@ -3,4 +3,6 @@
     <string name="app_icon">App Icon</string>
     <string name="splash_screen_title">GitHub User App</string>
     <string name="splash_screen_subtitle">by @fachrizalmrsln</string>
+    <string name="icon_search_home_page">Icon Search Home Page</string>
+    <string name="search_here">Search here . . .</string>
 </resources>

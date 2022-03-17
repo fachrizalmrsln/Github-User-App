@@ -10,22 +10,32 @@ import kotlinx.coroutines.Dispatchers
 abstract class BaseActivity<T: ViewBinding> : AppCompatActivity() {
 
     private var _mBinding: ViewBinding? = null
-    abstract val mBindingInflater: (LayoutInflater) -> T
-
     @Suppress("UNCHECKED_CAST")
     protected val mBinding: T
             get() = _mBinding as T
 
-    lateinit var mScopeMain: CoroutineScope
-    abstract fun activityScope(scope: CoroutineScope)
+   private var _mActivityScope: CoroutineScope? = null
+   protected val mActivityScope: CoroutineScope
+            get() = _mActivityScope!!
+
+    abstract val mBindingInflater: (LayoutInflater) -> T
+    abstract fun initializeViews()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupViewBinding()
+        setupActivityScope()
+
+        initializeViews()
+    }
+
+    private fun setupViewBinding() {
         _mBinding = mBindingInflater.invoke(layoutInflater)
         setContentView(requireNotNull(_mBinding).root)
+    }
 
-        mScopeMain = CoroutineScope(Dispatchers.Main)
-        activityScope(mScopeMain)
+    private fun setupActivityScope() {
+        _mActivityScope = CoroutineScope(Dispatchers.Main)
     }
 
     override fun onDestroy() {

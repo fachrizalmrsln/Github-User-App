@@ -27,7 +27,6 @@ class SplashScreen : AppCompatActivity() {
     private fun initiateScreen() = CoroutineScope(Dispatchers.Main).launch {
         mViewModel.mLaunchToHome.collect { isLaunch ->
             if (isLaunch) navigateToHome(clearStack = true)
-            finish()
         }
     }
 

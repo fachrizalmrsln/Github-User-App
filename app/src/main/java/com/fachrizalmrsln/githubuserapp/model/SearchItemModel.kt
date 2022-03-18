@@ -1,5 +1,9 @@
 package com.fachrizalmrsln.githubuserapp.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class SearchItemModel(
     var id: Int,
     var avatar_url: String,
@@ -8,4 +12,6 @@ data class SearchItemModel(
     var bio: String,
     var location: String,
     var email: String,
-)
+    var follower: String,
+    var following: String
+) : Parcelable

@@ -22,7 +22,7 @@ class HolderSearchResults(
         tvLocation.text = data.location
         tvEmail.text = data.email
 
-        itemView.setOnClickListener {
+        rlContainer.setOnClickListener {
             listener.onSearchItemCLick(data)
         }
     }

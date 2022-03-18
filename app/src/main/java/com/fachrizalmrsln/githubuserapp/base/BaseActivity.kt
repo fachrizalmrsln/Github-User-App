@@ -11,24 +11,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseActivity<T: ViewBinding> : AppCompatActivity(), CoroutineScope {
+abstract class BaseActivity<T : ViewBinding> : AppCompatActivity(), CoroutineScope {
 
     private var _mBinding: ViewBinding? = null
+
     @Suppress("UNCHECKED_CAST")
     protected val mBinding: T
-            get() = _mBinding as T
+        get() = _mBinding as T
 
     private lateinit var mScope: CompletableJob
     private fun setupJob() {
         mScope = Job()
     }
+
     private fun cancelJob() {
         if (mScope.isActive) mScope.cancel()
     }
+
     protected fun restartJob() {
         cancelJob()
         setupJob()
     }
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + mScope
 

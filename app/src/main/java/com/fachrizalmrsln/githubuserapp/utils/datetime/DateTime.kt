@@ -23,14 +23,13 @@ fun String?.timeAgoTimestamp(): String {
     } else "-"
 }
 
-private fun String.formatDateAndTime(): Long {
+fun String.formatDateAndTime(): Long {
     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.forLanguageTag("EN"))
     val parse = sdf.parse(this)
     return (parse?.time ?: this) as Long
 }
 
-
-private fun Long.convertTimeStamp(): String {
+fun Long.convertTimeStamp(): String {
     return SimpleDateFormat("dd MMMM yyyy", Locale.forLanguageTag("EN"))
         .format(this)
 }

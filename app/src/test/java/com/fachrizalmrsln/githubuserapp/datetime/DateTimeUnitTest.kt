@@ -1,5 +1,6 @@
 package com.fachrizalmrsln.githubuserapp.datetime
 
+import com.fachrizalmrsln.githubuserapp.utils.datetime.convertTimeStamp
 import com.fachrizalmrsln.githubuserapp.utils.datetime.formatDateAndTime
 import com.fachrizalmrsln.githubuserapp.utils.datetime.timeAgoTimestamp
 import org.junit.Assert.*
@@ -87,6 +88,24 @@ class DateTimeUnitTest {
             mDate.timeAgoTimestamp()
         }
         assertEquals(mDateExpected, mResult.message)
+    }
+
+    @Test
+    fun convertTimeStamp_isCorrect() {
+        val mDateGiven = 1647549695000
+        val mDateExpected = "18 March 2022"
+
+        val mResults = mDateGiven.convertTimeStamp()
+        assertEquals(mDateExpected, mResults)
+    }
+
+    @Test
+    fun convertTimeStamp_isInCorrect() {
+        val mDateGiven = 1647549695000
+        val mDateExpected = "20 March 2022"
+
+        val mResults = mDateGiven.convertTimeStamp()
+        assertNotEquals(mDateExpected, mResults)
     }
 
 }

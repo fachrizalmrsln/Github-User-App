@@ -32,6 +32,6 @@ private fun String.formatDateAndTime(): Long {
 
 
 private fun Long.convertTimeStamp(): String {
-    return SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.forLanguageTag("EN"))
+    return SimpleDateFormat("dd MMMM yyyy", Locale.forLanguageTag("EN"))
         .format(this)
 }

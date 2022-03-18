@@ -9,7 +9,6 @@ fun String?.timeAgoTimestamp(): String {
     return if (!this.isNullOrEmpty()) {
         val timeStamp = formatDateAndTime()
         val seconds = abs(getInstance().timeInMillis - timeStamp) / 1000
-        println(getInstance().timeInMillis.convertTimeStamp())
         val minutes = (seconds / 60).toInt()
         val hours = minutes / 60
         val days = hours / 24

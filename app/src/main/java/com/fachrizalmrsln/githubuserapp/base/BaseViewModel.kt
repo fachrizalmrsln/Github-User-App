@@ -3,14 +3,16 @@ package com.fachrizalmrsln.githubuserapp.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CompletableJob
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel : ViewModel(), CoroutineScope {
 
+    companion object {
+        const val INITIAL = "INITIAL"
+        const val EXCEPTION = "EXCEPTION"
+        const val CANCEL = "CANCEL"
+    }
     private val _loadingStatus = MutableLiveData<Boolean>()
     val loadingStatus: LiveData<Boolean> = _loadingStatus
 
@@ -20,14 +22,23 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
     lateinit var mScope: CompletableJob
     private fun setupJob() {
         mScope = Job()
+        mScope.invokeOnCompletion {
+            if (it?.message == INITIAL) {
+                _loadingStatus.value = false
+                _loadingStatus.value = true
+            } else _loadingStatus.value = false
+        }
     }
-    private fun cancelJob() {
-        if (mScope.isActive) mScope.cancel()
+
+    private fun cancelJob(cancelMessage: String = CANCEL) {
+        if (mScope.isActive) mScope.cancel(CancellationException(cancelMessage))
     }
-    protected fun restartJob() {
-        cancelJob()
+
+    protected fun restartJob(restartMessage: String = EXCEPTION) {
+        cancelJob(restartMessage)
         setupJob()
     }
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + mScope
 

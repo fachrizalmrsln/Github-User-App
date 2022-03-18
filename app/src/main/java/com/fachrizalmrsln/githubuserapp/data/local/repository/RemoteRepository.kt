@@ -1,12 +1,10 @@
 package com.fachrizalmrsln.githubuserapp.data.local.repository
 
-import android.util.Log
 import com.fachrizalmrsln.githubuserapp.data.local.IRemoteSource
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -34,10 +32,9 @@ class RemoteRepository @Inject constructor(
                             it.email = detailUser.email.checkNullOrEmpty()
                         }
                 }
-                println(chunkedList[i])
                 emit(chunkedList[i])
             }
-        }.catch { Log.d("Test", it.toString()) }
+        }
     }
 
 }

@@ -15,8 +15,8 @@ interface IRemoteSource {
 
     @GET("users/{user}")
     suspend fun getDetailUser(
-        @Path("user") userID: String
-    ): UserModel?
+        @Path("user") userName: String
+    ): UserModel
 
     @GET("users/{user}/repos")
     suspend fun getUserRepository(

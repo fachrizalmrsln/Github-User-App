@@ -44,7 +44,10 @@ class RemoteRepository @Inject constructor(
     override suspend fun getUserRepositories(userName: String): Flow<List<UserRepositories>> {
         return flow {
             val data = remoteSource.getUserRepository(userName)
-            data.map { it.updated_at = it.updated_at.timeAgoTimestamp() }
+            data.map {
+                it.updated_at = it.updated_at.timeAgoTimestamp()
+                it.avatar_url = it.owner.avatar_url
+            }
             emit(data)
         }
     }

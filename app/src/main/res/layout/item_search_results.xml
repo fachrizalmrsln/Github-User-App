@@ -20,6 +20,7 @@
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
+        android:maxWidth="@dimen/dp_200"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_12"
         android:layout_marginTop="@dimen/dp_4"
@@ -36,6 +37,7 @@
     <TextView
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
+        android:maxWidth="@dimen/dp_100"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_4"
         android:layout_marginTop="@dimen/dp_4"
@@ -50,7 +52,7 @@
 
     <TextView
         android:id="@+id/tv_about"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_12"
         android:layout_marginTop="@dimen/dp_2"
@@ -59,6 +61,7 @@
         android:maxLines="1"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_image"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         tools:text="@string/android_engineer_at_ajaib" />
@@ -66,6 +69,7 @@
     <TextView
         android:id="@+id/tv_location"
         android:layout_width="wrap_content"
+        android:maxWidth="@dimen/dp_150"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_12"
         android:layout_marginTop="@dimen/dp_10"
@@ -80,6 +84,7 @@
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
+        android:maxWidth="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_4"
         android:ellipsize="end"

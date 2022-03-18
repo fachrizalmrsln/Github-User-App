@@ -5,22 +5,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fachrizalmrsln.githubuserapp.databinding.ItemSearchResultsBinding
-import com.fachrizalmrsln.githubuserapp.model.UserModel
+import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 
 @SuppressLint("NotifyDataSetChanged")
 class AdapterSearchResults : RecyclerView.Adapter<HolderSearchResults>() {
 
     interface ListenerSearchResults {
-        fun onSearchItemCLick(result: UserModel)
+        fun onSearchItemCLick(result: SearchItemModel)
     }
 
     lateinit var listener: ListenerSearchResults
-    private var mDataList = mutableListOf<UserModel>()
+    private var mDataList = mutableListOf<SearchItemModel>()
 
-    fun insertData(dataNews: List<UserModel>) {
+    fun insertData(dataNews: List<SearchItemModel>, clear: Boolean = false) {
         mDataList.apply {
-            clear()
-            addAll(dataNews)
+            if (clear) clear()
+            addAll(size, dataNews)
         }
         notifyDataSetChanged()
     }

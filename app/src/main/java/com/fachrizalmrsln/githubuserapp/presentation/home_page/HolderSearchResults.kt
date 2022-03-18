@@ -2,8 +2,9 @@ package com.fachrizalmrsln.githubuserapp.presentation.home_page
 
 import androidx.recyclerview.widget.RecyclerView
 import com.fachrizalmrsln.githubuserapp.databinding.ItemSearchResultsBinding
-import com.fachrizalmrsln.githubuserapp.model.UserModel
+import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.utils.image.loadImage
+import com.fachrizalmrsln.githubuserapp.utils.strings.isUserName
 
 class HolderSearchResults(
     private val mBinding: ItemSearchResultsBinding,
@@ -12,13 +13,13 @@ class HolderSearchResults(
 
     private val mContext = mBinding.root.context
 
-    fun bindSearchResults(data: UserModel) = with(mBinding) {
+    fun bindSearchResults(data: SearchItemModel) = with(mBinding) {
         ivImage.loadImage(mContext, data.avatar_url)
-        tvName.text = data.login
-        tvUsername.text = data.login
-        tvAbout.text = data.organizations_url
-        tvLocation.text = data.login
-        tvEmail.text = data.login
+        tvName.text = data.user_full_name
+        tvUsername.text = data.login.isUserName()
+        tvAbout.text = data.bio
+        tvLocation.text = data.location
+        tvEmail.text = data.email
 
         itemView.setOnClickListener {
             listener.onSearchItemCLick(data)

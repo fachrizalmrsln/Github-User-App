@@ -8,13 +8,14 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityHomePageBinding
-import com.fachrizalmrsln.githubuserapp.model.UserModel
+import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomePageActivity
-    : BaseActivity<ActivityHomePageBinding>(), AdapterSearchResults.ListenerSearchResults {
+    : BaseActivity<ActivityHomePageBinding>(),
+    AdapterSearchResults.ListenerSearchResults {
 
     private val mViewModel: HomePageViewModel by viewModels()
     private lateinit var mAdapter: AdapterSearchResults
@@ -55,13 +56,15 @@ class HomePageActivity
     }
 
     private fun searchUser(query: String) = mActivityScope.launch {
+        var inputState = true
         mViewModel.searchUser(query).collect { searchResults ->
-            mAdapter.insertData(searchResults.items)
-            mBinding.clSearchResults.visibility = View.VISIBLE
+            mAdapter.insertData(searchResults, inputState)
+            mBinding.llSearchResults.visibility = View.VISIBLE
+            inputState = false
         }
     }
 
-    override fun onSearchItemCLick(result: UserModel) {
+    override fun onSearchItemCLick(result: SearchItemModel) {
         Toast.makeText(this, result.login, Toast.LENGTH_LONG).show()
     }
 

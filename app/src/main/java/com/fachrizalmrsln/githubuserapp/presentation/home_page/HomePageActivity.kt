@@ -44,6 +44,7 @@ class HomePageActivity
 
     private fun searchListener() {
         mBinding.etSearch.apply {
+            requestFocus()
             setOnEditorActionListener { _, actionId, _ ->
                 val query = text.toString().trim()
                 if (actionId == IME_ACTION_SEARCH)

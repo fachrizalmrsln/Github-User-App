@@ -1,4 +1,4 @@
-package com.fachrizalmrsln.githubuserapp.data.local
+package com.fachrizalmrsln.githubuserapp.data.remote
 
 import com.fachrizalmrsln.githubuserapp.model.SearchModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel

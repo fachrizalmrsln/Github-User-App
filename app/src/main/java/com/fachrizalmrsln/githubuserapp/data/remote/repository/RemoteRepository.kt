@@ -1,6 +1,6 @@
-package com.fachrizalmrsln.githubuserapp.data.local.repository
+package com.fachrizalmrsln.githubuserapp.data.remote.repository
 
-import com.fachrizalmrsln.githubuserapp.data.local.IRemoteSource
+import com.fachrizalmrsln.githubuserapp.data.remote.IRemoteSource
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
@@ -34,6 +34,12 @@ class RemoteRepository @Inject constructor(
                 }
                 emit(chunkedList[i])
             }
+        }
+    }
+
+    override suspend fun getDetailUser(userName: String): Flow<UserModel> {
+        return flow {
+            emit(remoteSource.getDetailUser(userName))
         }
     }
 

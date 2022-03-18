@@ -1,11 +1,14 @@
 package com.fachrizalmrsln.githubuserapp.presentation.detail_page
 
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityDetailPageBinding
+import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.utils.data.getStringExtra
+import com.fachrizalmrsln.githubuserapp.utils.image.loadImage
+import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
+import com.fachrizalmrsln.githubuserapp.utils.strings.isUserName
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -36,11 +39,21 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
 
     private fun eventLister() {
         mViewModel.mUserDetailResults.observe(this) {
-            Log.d("Test", it.toString())
+            initDataToUI(it)
         }
         mViewModel.loadingStatus.observe(this) {
-            showToastShort(it.toString())
         }
+    }
+
+    private fun initDataToUI(data: UserModel) = with(mBinding) {
+        data.avatar_url?.let { ivImage.loadImage(this@DetailPageActivity, it) }
+        tvName.text = data.name.checkNullOrEmpty()
+        tvUserName.text = data.login.isUserName()
+        tvAbout.text = data.bio.checkNullOrEmpty()
+        tvFollower.text = "${data.followers ?: 0}"
+        tvFollowing.text = "${data.following ?: 0}"
+        tvLocation.text = data.location.checkNullOrEmpty()
+        tvEmail.text = data.email.checkNullOrEmpty()
     }
 
 }

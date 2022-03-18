@@ -34,7 +34,7 @@ class HomePageActivity
     override fun networkError() {
         mViewModel.messageToUI.observe(this@HomePageActivity) {
             if (mSearchResultsEmpty) mBinding.llSearchResults.visibility = View.GONE
-            showToastShort(it.toString())
+            showToastLong(it.toString())
         }
     }
 

@@ -45,7 +45,7 @@ abstract class BaseActivity<T: ViewBinding> : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun showToastLength(message: String) {
+    fun showToastLong(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 

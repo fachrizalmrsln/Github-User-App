@@ -34,14 +34,14 @@ class AdapterSearchResults : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun clearResults() {
+    fun clearData() {
         mDataList.clear()
         notifyDataSetChanged()
     }
 
-    fun insertData(dataNews: List<SearchItemModel>) {
+    fun insertData(data: List<SearchItemModel>) {
         mDataList.apply {
-            addAll(size, dataNews)
+            addAll(size, data)
         }
         notifyDataSetChanged()
     }

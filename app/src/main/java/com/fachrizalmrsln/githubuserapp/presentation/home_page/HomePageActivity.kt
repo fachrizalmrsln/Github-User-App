@@ -26,7 +26,7 @@ class HomePageActivity
         get() = ActivityHomePageBinding::inflate
 
     override fun initializeViews() {
-        setupAdapter()
+        setupRecyclerView()
         searchListener()
         eventLister()
     }
@@ -42,14 +42,9 @@ class HomePageActivity
         navigateToDetail(result)
     }
 
-    private fun setupAdapter() {
-        mAdapter = AdapterSearchResults()
-        mAdapter.mListener = this
-
-        setupRecyclerView()
-    }
-
     private fun setupRecyclerView() = with(mBinding) {
+        mAdapter = AdapterSearchResults()
+        mAdapter.mListener = this@HomePageActivity
         rvSearch.apply {
             layoutManager = LinearLayoutManager(this@HomePageActivity)
             adapter = mAdapter
@@ -71,7 +66,7 @@ class HomePageActivity
 
     private fun searchUser(query: String) {
         launch {
-            mAdapter.clearResults()
+            mAdapter.clearData()
             mViewModel.searchUser(query)
         }
     }

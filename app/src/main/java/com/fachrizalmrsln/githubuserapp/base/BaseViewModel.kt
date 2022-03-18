@@ -34,7 +34,7 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
         if (mScope.isActive) mScope.cancel(CancellationException(cancelMessage))
     }
 
-    protected fun restartJob(restartMessage: String = EXCEPTION) {
+    protected fun restartJob(restartMessage: String = CANCEL) {
         cancelJob(restartMessage)
         setupJob()
     }

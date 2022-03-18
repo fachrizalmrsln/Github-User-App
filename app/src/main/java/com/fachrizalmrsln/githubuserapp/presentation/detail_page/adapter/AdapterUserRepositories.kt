@@ -1,4 +1,4 @@
-package com.fachrizalmrsln.githubuserapp.presentation.home_page.adapter
+package com.fachrizalmrsln.githubuserapp.presentation.detail_page.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,25 +6,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fachrizalmrsln.githubuserapp.databinding.ItemLoadingListBinding
 import com.fachrizalmrsln.githubuserapp.databinding.ItemNoSpaceBinding
-import com.fachrizalmrsln.githubuserapp.databinding.ItemSearchResultsBinding
-import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
+import com.fachrizalmrsln.githubuserapp.databinding.ItemRepositoriesBinding
+import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.presentation.detail_page.holder.HolderUserRepositories
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.holder.HolderLoading
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.holder.HolderNoSpace
-import com.fachrizalmrsln.githubuserapp.presentation.home_page.holder.HolderSearchResults
 import com.fachrizalmrsln.githubuserapp.utils.constant.VIEW_TYPE_ITEM
 import com.fachrizalmrsln.githubuserapp.utils.constant.VIEW_TYPE_LOADING
 import com.fachrizalmrsln.githubuserapp.utils.constant.VIEW_TYPE_NO_SPACE
 
 @SuppressLint("NotifyDataSetChanged")
-class AdapterSearchResults : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterUserRepositories : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    interface ListenerSearchResults {
-        fun onSearchItemCLick(result: SearchItemModel)
-    }
-
-    lateinit var mListener: ListenerSearchResults
     private var mLoadingState: Boolean = true
-    private var mDataList = mutableListOf<SearchItemModel>()
+    private var mDataList = mutableListOf<UserRepositories>()
 
     fun loadingState(loadingState: Boolean) {
         mLoadingState = loadingState
@@ -33,13 +28,8 @@ class AdapterSearchResults : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyItemChanged(-1)
         notifyDataSetChanged()
     }
-
-    fun clearData() {
-        mDataList.clear()
-        notifyDataSetChanged()
-    }
-
-    fun insertData(data: List<SearchItemModel>) {
+    
+    fun insertData(data: List<UserRepositories>) {
         mDataList.apply {
             addAll(size, data)
         }
@@ -58,8 +48,8 @@ class AdapterSearchResults : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 HolderNoSpace(mBinding)
             }
             else -> {
-                val mBinding = ItemSearchResultsBinding.inflate(inflater)
-                HolderSearchResults(mBinding, mListener)
+                val mBinding = ItemRepositoriesBinding.inflate(inflater)
+                HolderUserRepositories(mBinding)
             }
         }
     }
@@ -68,7 +58,7 @@ class AdapterSearchResults : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (holder.itemViewType) {
             VIEW_TYPE_LOADING -> (holder as? HolderLoading)?.bindLoading(mLoadingState)
             VIEW_TYPE_NO_SPACE -> (holder as? HolderNoSpace)
-            else -> (holder as? HolderSearchResults)?.bindSearchResults(mDataList[position])
+            else -> (holder as? HolderUserRepositories)?.bindRepositories(mDataList[position])
         }
     }
 

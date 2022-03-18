@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fachrizalmrsln.githubuserapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".app.GitHubUserAppApplication"
@@ -13,6 +13,9 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubUserApp">
+        <activity
+            android:name=".presentation.detail_page.DetailPageActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.splash_screen.SplashScreen"
             android:exported="true">

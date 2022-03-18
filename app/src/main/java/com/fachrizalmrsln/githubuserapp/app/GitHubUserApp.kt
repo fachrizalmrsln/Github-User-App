@@ -1,8 +1,8 @@
 package com.fachrizalmrsln.githubuserapp.app
 
 import android.app.Application
-import com.fachrizalmrsln.githubuserapp.data.local.repository.IRemoteRepository
-import com.fachrizalmrsln.githubuserapp.data.local.repository.RemoteRepository
+import com.fachrizalmrsln.githubuserapp.data.remote.repository.IRemoteRepository
+import com.fachrizalmrsln.githubuserapp.data.remote.repository.RemoteRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

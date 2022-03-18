@@ -3,12 +3,12 @@ package com.fachrizalmrsln.githubuserapp.presentation.home_page
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityHomePageBinding
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
+import com.fachrizalmrsln.githubuserapp.navigation.navigateToDetail
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.adapter.AdapterSearchResults
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -25,8 +25,13 @@ class HomePageActivity
     override val mBindingInflater: (LayoutInflater) -> ActivityHomePageBinding
         get() = ActivityHomePageBinding::inflate
 
+    override fun onPause() {
+        super.onPause()
+        mViewModel.restartViewModelJob()
+    }
+
     override fun initializeViews() {
-        setupAdapter()
+        setupRecyclerView()
         searchListener()
         eventLister()
     }
@@ -39,17 +44,12 @@ class HomePageActivity
     }
 
     override fun onSearchItemCLick(result: SearchItemModel) {
-        Toast.makeText(this, result.login, Toast.LENGTH_LONG).show()
-    }
-
-    private fun setupAdapter() {
-        mAdapter = AdapterSearchResults()
-        mAdapter.mListener = this
-
-        setupRecyclerView()
+        navigateToDetail(result)
     }
 
     private fun setupRecyclerView() = with(mBinding) {
+        mAdapter = AdapterSearchResults()
+        mAdapter.mListener = this@HomePageActivity
         rvSearch.apply {
             layoutManager = LinearLayoutManager(this@HomePageActivity)
             adapter = mAdapter
@@ -71,7 +71,7 @@ class HomePageActivity
 
     private fun searchUser(query: String) {
         launch {
-            mAdapter.clearResults()
+            mAdapter.clearData()
             mViewModel.searchUser(query)
         }
     }

@@ -1,7 +1,8 @@
-package com.fachrizalmrsln.githubuserapp.data.local
+package com.fachrizalmrsln.githubuserapp.data.remote
 
 import com.fachrizalmrsln.githubuserapp.model.SearchModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
+import com.fachrizalmrsln.githubuserapp.model.UserRepositories
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -21,6 +22,6 @@ interface IRemoteSource {
     @GET("users/{user}/repos")
     suspend fun getUserRepository(
         @Path("user") userID: String
-    ): List<UserModel?>?
+    ): List<UserRepositories>
 
 }

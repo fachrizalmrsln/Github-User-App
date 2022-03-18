@@ -18,7 +18,7 @@ class SplashScreen : BaseActivity<ActivitySplashScreenBinding>() {
         get() = ActivitySplashScreenBinding::inflate
 
     override fun initializeViews() {
-        mActivityScope.launch {
+        launch {
             delay(SPLASH_SCREEN_DURATION)
             navigateToHome(clearStack = true)
         }

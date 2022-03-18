@@ -33,7 +33,6 @@
             android:lines="1"
             android:maxWidth="@dimen/dp_200"
             android:maxLines="1"
-            android:textColor="@color/black"
             android:textSize="@dimen/sp_22"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +51,6 @@
             android:lines="1"
             android:maxWidth="@dimen/dp_200"
             android:maxLines="1"
-            android:textColor="@color/black"
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image"
@@ -69,7 +67,6 @@
             android:ellipsize="end"
             android:maxWidth="@dimen/dp_200"
             android:maxLines="3"
-            android:textColor="@color/black"
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image"
@@ -105,7 +102,6 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxLines="1"
-                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 tools:text="@string/k_12" />
@@ -118,7 +114,6 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:text="@string/followers"
-                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
             <ImageView
@@ -137,7 +132,6 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxLines="1"
-                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 tools:text="@string/_120" />
@@ -150,7 +144,6 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:text="@string/following"
-                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
@@ -186,7 +179,6 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxLines="1"
-                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 tools:text="@string/jakarta_indonesia" />
 
@@ -225,7 +217,6 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:maxLines="1"
-                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 tools:text="@string/fachrizalmrslngmail" />
 

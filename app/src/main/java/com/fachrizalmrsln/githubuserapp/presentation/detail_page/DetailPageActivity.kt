@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import androidx.activity.viewModels
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityDetailPageBinding
-import com.fachrizalmrsln.githubuserapp.model.UserModel
-import com.fachrizalmrsln.githubuserapp.utils.data.getStringExtra
+import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
+import com.fachrizalmrsln.githubuserapp.utils.data.getParcelable
 import com.fachrizalmrsln.githubuserapp.utils.image.loadImage
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
 import com.fachrizalmrsln.githubuserapp.utils.strings.isUserName
@@ -17,8 +17,10 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
 
     private val mViewModel: DetailPageViewModel by viewModels()
 
+    private var mData: SearchItemModel? = null
+
     companion object {
-        const val ARGUMENT_USER_NAME = "USER_NAME"
+        const val ARGUMENT_USER_DETAIL = "USER_DETAIL'"
     }
 
     override val mBindingInflater: (LayoutInflater) -> ActivityDetailPageBinding
@@ -27,11 +29,13 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
     override fun initializeViews() {
         getData()
         eventLister()
+        initDataToUI()
     }
 
     override fun networkError() {}
 
     private fun getData() {
+        mData = getParcelable(ARGUMENT_USER_DETAIL)
         launch {
             mViewModel.getDetailUser(getStringExtra(ARGUMENT_USER_NAME))
         }
@@ -45,15 +49,17 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
         }
     }
 
-    private fun initDataToUI(data: UserModel) = with(mBinding) {
-        data.avatar_url?.let { ivImage.loadImage(this@DetailPageActivity, it) }
-        tvName.text = data.name.checkNullOrEmpty()
-        tvUserName.text = data.login.isUserName()
-        tvAbout.text = data.bio.checkNullOrEmpty()
-        tvFollower.text = "${data.followers ?: 0}"
-        tvFollowing.text = "${data.following ?: 0}"
-        tvLocation.text = data.location.checkNullOrEmpty()
-        tvEmail.text = data.email.checkNullOrEmpty()
+    private fun initDataToUI() = with(mBinding) {
+        mData?.let {
+            ivImage.loadImage(this@DetailPageActivity, it.avatar_url)
+            tvName.text = it.user_full_name.checkNullOrEmpty()
+            tvUserName.text = it.login.isUserName()
+            tvAbout.text = it.bio.checkNullOrEmpty()
+            tvFollower.text = it.follower.checkNullOrEmpty()
+            tvFollowing.text = it.following.checkNullOrEmpty()
+            tvLocation.text = it.location.checkNullOrEmpty()
+            tvEmail.text = it.email.checkNullOrEmpty()
+        }
     }
 
 }

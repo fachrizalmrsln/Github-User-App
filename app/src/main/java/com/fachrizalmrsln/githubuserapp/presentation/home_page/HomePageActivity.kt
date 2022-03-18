@@ -39,7 +39,7 @@ class HomePageActivity
     }
 
     override fun onSearchItemCLick(result: SearchItemModel) {
-        navigateToDetail(result.login)
+        navigateToDetail(result)
     }
 
     private fun setupAdapter() {

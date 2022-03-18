@@ -1,28 +1,26 @@
 package com.fachrizalmrsln.githubuserapp.data.local
 
-import com.fachrizalmrsln.githubuserapp.model.User
+import com.fachrizalmrsln.githubuserapp.model.SearchModel
+import com.fachrizalmrsln.githubuserapp.model.UserModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface IRemoteSource {
 
-    @GET("users")
-    suspend fun getAllUsers(): List<User?>?
-
     @GET("search/users")
     suspend fun getSearchUser(
         @Query("q") query: String
-    ): List<User?>?
+    ): SearchModel
 
     @GET("users/{user}")
     suspend fun getDetailUser(
-        @Path("user") userID: String
-    ): User?
+        @Path("user") userName: String
+    ): UserModel
 
     @GET("users/{user}/repos")
     suspend fun getUserRepository(
         @Path("user") userID: String
-    ): List<User?>?
+    ): List<UserModel?>?
 
 }

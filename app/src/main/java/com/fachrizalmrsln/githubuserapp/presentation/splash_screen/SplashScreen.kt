@@ -1,9 +1,9 @@
 package com.fachrizalmrsln.githubuserapp.presentation.splash_screen
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import com.fachrizalmrsln.githubuserapp.R
-import com.fachrizalmrsln.githubuserapp.base.BaseClass
+import android.view.LayoutInflater
+import com.fachrizalmrsln.githubuserapp.base.BaseActivity
+import com.fachrizalmrsln.githubuserapp.databinding.ActivitySplashScreenBinding
 import com.fachrizalmrsln.githubuserapp.navigation.navigateToHome
 import com.fachrizalmrsln.githubuserapp.utils.constant.SPLASH_SCREEN_DURATION
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,18 +12,18 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
-class SplashScreen : BaseClass() {
+class SplashScreen : BaseActivity<ActivitySplashScreenBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+    override val mBindingInflater: (LayoutInflater) -> ActivitySplashScreenBinding
+        get() = ActivitySplashScreenBinding::inflate
 
-        delayingScreen()
+    override fun initializeViews() {
+        launch {
+            delay(SPLASH_SCREEN_DURATION)
+            navigateToHome(clearStack = true)
+        }
     }
 
-    private fun delayingScreen() = mScopeMain.launch {
-        delay(SPLASH_SCREEN_DURATION)
-        navigateToHome(clearStack = true)
-    }
+    override fun networkError() {}
 
 }

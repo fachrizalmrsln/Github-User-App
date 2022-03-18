@@ -6,6 +6,10 @@ import com.fachrizalmrsln.githubuserapp.databinding.ActivityDetailPageBinding
 
 class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
 
+    companion object {
+        const val ARGUMENT_USER_ID = "USER_ID"
+    }
+
     override val mBindingInflater: (LayoutInflater) -> ActivityDetailPageBinding
         get() = ActivityDetailPageBinding::inflate
 

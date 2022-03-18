@@ -1,6 +1,8 @@
 package com.fachrizalmrsln.githubuserapp.base
 
+import com.fachrizalmrsln.githubuserapp.BuildConfig
 import com.fachrizalmrsln.githubuserapp.data.local.IRemoteSource
+import com.fachrizalmrsln.githubuserapp.utils.constant.AUTHORIZATION
 import com.fachrizalmrsln.githubuserapp.utils.constant.BASE_URL
 import com.fachrizalmrsln.githubuserapp.utils.typeadapter.TypeInteger
 import com.fachrizalmrsln.githubuserapp.utils.typeadapter.TypeString
@@ -29,18 +31,18 @@ object BaseNetwork {
             .registerTypeAdapter(String::class.java, TypeString())
             .serializeNulls()
 
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-
+        val mInterceptor = HttpLoggingInterceptor()
+        mInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
             .addNetworkInterceptor {
                 val requestBuilder: Request.Builder = it.request().newBuilder()
+                requestBuilder.addHeader(AUTHORIZATION, BuildConfig.API_KEY)
                 it.proceed(requestBuilder.build())
             }
             .connectTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
-        client.addInterceptor(interceptor)
+        client.addInterceptor(mInterceptor)
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)

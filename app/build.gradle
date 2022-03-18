@@ -40,6 +40,7 @@ android {
                 arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+        buildConfigField "String", "API_KEY", "\"Bearer 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\""
     }
 }
 

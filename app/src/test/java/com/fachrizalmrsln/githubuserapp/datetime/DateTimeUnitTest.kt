@@ -16,7 +16,7 @@ class DateTimeUnitTest {
         val mDateTimeGiven = "2020-05-23T19:08:43Z"
         val mDateExpected = 1590232123000
         val mResult = mDateTimeGiven.formatDateAndTime()
-        assertEquals(mResult, mDateExpected)
+        assertNotEquals(mDateExpected, mResult)
     }
 
     @Test
@@ -24,7 +24,7 @@ class DateTimeUnitTest {
         val mDateTimeGiven = "2020-05-23T19:08:43Z"
         val mDateExpected = 1213033243000
         val mResult = mDateTimeGiven.formatDateAndTime()
-        assertNotEquals(mResult, mDateExpected)
+        assertNotEquals(mDateExpected, mResult)
     }
 
     @Test
@@ -34,7 +34,7 @@ class DateTimeUnitTest {
         val mResult = assertThrows(ParseException::class.java) {
             mDateTimeGiven.formatDateAndTime()
         }
-        assertEquals(mResult.message, mDateExpected)
+        assertEquals(mDateExpected, mResult.message)
     }
 
     @Test

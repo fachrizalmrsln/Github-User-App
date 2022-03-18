@@ -20,6 +20,7 @@ class HomePageActivity
 
     private val mViewModel: HomePageViewModel by viewModels()
     private lateinit var mAdapter: AdapterSearchResults
+    private var mSearchResultsEmpty = true
 
     override val mBindingInflater: (LayoutInflater) -> ActivityHomePageBinding
         get() = ActivityHomePageBinding::inflate
@@ -32,6 +33,7 @@ class HomePageActivity
 
     override fun networkError() {
         mViewModel.messageToUI.observe(this@HomePageActivity) {
+            if (mSearchResultsEmpty) mBinding.llSearchResults.visibility = View.GONE
             showToastShort(it.toString())
         }
     }
@@ -68,10 +70,9 @@ class HomePageActivity
     }
 
     private fun searchUser(query: String) = mActivityScope.launch {
-        var inputState = true
         mViewModel.searchUser(query).collect { searchResults ->
-            mAdapter.insertData(searchResults, inputState)
-            inputState = false
+            mAdapter.insertData(searchResults, mSearchResultsEmpty)
+            mSearchResultsEmpty = false
         }
     }
 

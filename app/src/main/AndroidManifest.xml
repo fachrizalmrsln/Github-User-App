@@ -14,14 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubUserApp">
         <activity
-            android:name=".presentation.detail_page.DetailPageActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.splash_screen.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,6 +25,9 @@
             android:name=".presentation.home_page.HomePageActivity"
             android:exported="true"
             android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".presentation.detail_page.DetailPageActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

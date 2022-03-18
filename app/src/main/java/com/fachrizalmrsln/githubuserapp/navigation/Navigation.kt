@@ -12,10 +12,10 @@ fun Activity.navigateToHome(clearStack: Boolean = false) {
     if (clearStack) finish()
 }
 
-fun Activity.navigateToDetail(userID: String) {
+fun Activity.navigateToDetail(userName: String) {
     startActivity(
         Intent(this, DetailPageActivity::class.java).apply {
-            putExtra(DetailPageActivity.ARGUMENT_USER_ID, userID)
+            putExtra(DetailPageActivity.ARGUMENT_USER_NAME, userName)
         }
     )
 }

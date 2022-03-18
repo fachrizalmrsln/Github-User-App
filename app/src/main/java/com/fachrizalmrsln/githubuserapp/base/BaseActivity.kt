@@ -2,6 +2,7 @@ package com.fachrizalmrsln.githubuserapp.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +21,7 @@ abstract class BaseActivity<T: ViewBinding> : AppCompatActivity() {
 
     abstract val mBindingInflater: (LayoutInflater) -> T
     abstract fun initializeViews()
+    abstract fun networkError()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,7 @@ abstract class BaseActivity<T: ViewBinding> : AppCompatActivity() {
         setupActivityScope()
 
         initializeViews()
+        networkError()
     }
 
     private fun setupViewBinding() {
@@ -36,6 +39,14 @@ abstract class BaseActivity<T: ViewBinding> : AppCompatActivity() {
 
     private fun setupActivityScope() {
         _mActivityScope = CoroutineScope(Dispatchers.Main)
+    }
+
+    fun showToastShort(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showToastLength(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {

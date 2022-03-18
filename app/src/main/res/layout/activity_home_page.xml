@@ -64,7 +64,7 @@
         tools:visibility="visible">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_search_dialog"
+            android:id="@+id/rv_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"
@@ -72,7 +72,6 @@
             tools:listitem="@layout/item_search_results" />
 
     </LinearLayout>
-
 
     <View
         android:id="@+id/view_space_left"

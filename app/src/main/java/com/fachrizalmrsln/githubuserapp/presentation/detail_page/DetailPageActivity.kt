@@ -37,13 +37,15 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
     private fun getData() {
         mData = getParcelable(ARGUMENT_USER_DETAIL)
         launch {
-            mViewModel.getDetailUser(getStringExtra(ARGUMENT_USER_NAME))
+            mData?.login?.let { mViewModel.getUserRepositories(it) }
         }
     }
 
     private fun eventLister() {
-        mViewModel.mUserDetailResults.observe(this) {
-            initDataToUI(it)
+        mViewModel.mUserRepositories.observe(this) { userRepositories ->
+            userRepositories.forEach { repositories ->
+                println(repositories.toString())
+            }
         }
         mViewModel.loadingStatus.observe(this) {
         }

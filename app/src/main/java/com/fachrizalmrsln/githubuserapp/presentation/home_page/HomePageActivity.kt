@@ -69,12 +69,10 @@ class HomePageActivity
         }
     }
 
-    private fun searchUser(query: String) = mActivityScope.launch {
-        var newSearchState = true
-        mViewModel.searchUser(query).collect { searchResults ->
-            mAdapter.insertData(searchResults, newSearchState)
-            mSearchResultsEmpty = false
-            newSearchState = false
+    private fun searchUser(query: String) {
+        launch {
+            mAdapter.clearResults()
+            mViewModel.searchUser(query)
         }
     }
 
@@ -82,6 +80,10 @@ class HomePageActivity
         mViewModel.loadingStatus.observe(this) {
             if (it) mBinding.llSearchResults.visibility = View.VISIBLE
             mAdapter.loadingState(it)
+        }
+        mViewModel.mSearchResults.observe(this) { searchResults ->
+            mAdapter.insertData(searchResults)
+            mSearchResultsEmpty = false
         }
     }
 

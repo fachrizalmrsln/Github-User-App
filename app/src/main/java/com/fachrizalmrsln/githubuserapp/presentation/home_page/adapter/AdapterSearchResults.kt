@@ -34,9 +34,13 @@ class AdapterSearchResults : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun insertData(dataNews: List<SearchItemModel>, clear: Boolean = false) {
+    fun clearResults() {
+        mDataList.clear()
+        notifyDataSetChanged()
+    }
+
+    fun insertData(dataNews: List<SearchItemModel>) {
         mDataList.apply {
-            if (clear) clear()
             addAll(size, dataNews)
         }
         notifyDataSetChanged()

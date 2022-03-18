@@ -25,6 +25,11 @@ class HomePageActivity
     override val mBindingInflater: (LayoutInflater) -> ActivityHomePageBinding
         get() = ActivityHomePageBinding::inflate
 
+    override fun onPause() {
+        super.onPause()
+        mViewModel.restartViewModelJob()
+    }
+
     override fun initializeViews() {
         setupRecyclerView()
         searchListener()

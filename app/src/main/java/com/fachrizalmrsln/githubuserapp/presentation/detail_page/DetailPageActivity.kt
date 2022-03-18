@@ -29,6 +29,11 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
     override val mBindingInflater: (LayoutInflater) -> ActivityDetailPageBinding
         get() = ActivityDetailPageBinding::inflate
 
+    override fun onPause() {
+        super.onPause()
+        mViewModel.restartViewModelJob()
+    }
+
     override fun initializeViews() {
         getData()
         eventLister()

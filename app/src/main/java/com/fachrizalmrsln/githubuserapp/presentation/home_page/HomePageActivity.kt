@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityHomePageBinding
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
+import com.fachrizalmrsln.githubuserapp.presentation.home_page.adapter.AdapterSearchResults
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -41,13 +42,13 @@ class HomePageActivity
 
     private fun setupAdapter() {
         mAdapter = AdapterSearchResults()
-        mAdapter.listener = this
+        mAdapter.mListener = this
 
         setupRecyclerView()
     }
 
     private fun setupRecyclerView() = with(mBinding) {
-        rvSearchDialog.apply {
+        rvSearch.apply {
             layoutManager = LinearLayoutManager(this@HomePageActivity)
             adapter = mAdapter
             setHasFixedSize(true)
@@ -70,15 +71,14 @@ class HomePageActivity
         var inputState = true
         mViewModel.searchUser(query).collect { searchResults ->
             mAdapter.insertData(searchResults, inputState)
-            mBinding.llSearchResults.visibility = View.VISIBLE
             inputState = false
         }
     }
 
     private fun eventLister() {
         mViewModel.loadingStatus.observe(this) {
-            if (it) showToastShort("Loading")
-            else showToastShort("Done")
+            if (it) mBinding.llSearchResults.visibility = View.VISIBLE
+            mAdapter.loadingState(it)
         }
     }
 

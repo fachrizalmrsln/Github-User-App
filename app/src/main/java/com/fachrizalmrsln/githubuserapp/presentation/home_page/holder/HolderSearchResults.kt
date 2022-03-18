@@ -1,8 +1,9 @@
-package com.fachrizalmrsln.githubuserapp.presentation.home_page
+package com.fachrizalmrsln.githubuserapp.presentation.home_page.holder
 
 import androidx.recyclerview.widget.RecyclerView
 import com.fachrizalmrsln.githubuserapp.databinding.ItemSearchResultsBinding
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
+import com.fachrizalmrsln.githubuserapp.presentation.home_page.adapter.AdapterSearchResults
 import com.fachrizalmrsln.githubuserapp.utils.image.loadImage
 import com.fachrizalmrsln.githubuserapp.utils.strings.isUserName
 

@@ -24,4 +24,6 @@ class SplashScreen : BaseActivity<ActivitySplashScreenBinding>() {
         }
     }
 
+    override fun networkError() {}
+
 }

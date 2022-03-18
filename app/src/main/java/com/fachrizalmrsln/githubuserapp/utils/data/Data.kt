@@ -1,6 +1,6 @@
 package com.fachrizalmrsln.githubuserapp.utils.data
 
 import android.app.Activity
-import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
+import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 
-fun Activity.getStringExtra(key: String) = this.intent.getStringExtra(key).checkNullOrEmpty()
+fun Activity.getParcelable(key: String) = this.intent.getParcelableExtra<SearchItemModel>(key)

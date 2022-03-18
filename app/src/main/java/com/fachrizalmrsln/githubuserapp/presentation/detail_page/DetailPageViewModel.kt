@@ -36,4 +36,8 @@ class DetailPageViewModel @Inject constructor(
         }
     }
 
+    fun restartViewModelJob() {
+        restartJob()
+    }
+
 }

@@ -36,4 +36,8 @@ class HomePageViewModel @Inject constructor(
         }
     }
 
+    fun restartViewModelJob() {
+        restartJob()
+    }
+
 }

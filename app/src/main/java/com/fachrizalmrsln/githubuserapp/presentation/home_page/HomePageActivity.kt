@@ -70,9 +70,11 @@ class HomePageActivity
     }
 
     private fun searchUser(query: String) = mActivityScope.launch {
+        var newSearchState = true
         mViewModel.searchUser(query).collect { searchResults ->
-            mAdapter.insertData(searchResults, mSearchResultsEmpty)
+            mAdapter.insertData(searchResults, newSearchState)
             mSearchResultsEmpty = false
+            newSearchState = false
         }
     }
 

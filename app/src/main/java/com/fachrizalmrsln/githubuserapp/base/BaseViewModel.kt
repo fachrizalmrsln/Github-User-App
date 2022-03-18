@@ -3,6 +3,7 @@ package com.fachrizalmrsln.githubuserapp.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,13 +17,27 @@ abstract class BaseViewModel : ViewModel(), CoroutineScope {
     protected val _messageToUI = MutableLiveData<String>()
     val messageToUI: LiveData<String> = _messageToUI
 
-    private val job = Job()
+    lateinit var mScope: CompletableJob
+    private fun setupJob() {
+        mScope = Job()
+    }
+    private fun cancelJob() {
+        if (mScope.isActive) mScope.cancel()
+    }
+    protected fun restartJob() {
+        cancelJob()
+        setupJob()
+    }
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+        get() = Dispatchers.Main + mScope
+
+    init {
+        setupJob()
+    }
 
     override fun onCleared() {
         super.onCleared()
-        job.cancel()
+        cancelJob()
     }
 
     protected fun showLoading() {

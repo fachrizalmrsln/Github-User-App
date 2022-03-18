@@ -3,7 +3,10 @@ package com.fachrizalmrsln.githubuserapp.presentation.detail_page
 import android.view.LayoutInflater
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityDetailPageBinding
+import com.fachrizalmrsln.githubuserapp.utils.data.getStringExtra
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
 
     companion object {
@@ -13,7 +16,9 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
     override val mBindingInflater: (LayoutInflater) -> ActivityDetailPageBinding
         get() = ActivityDetailPageBinding::inflate
 
-    override fun initializeViews() {}
+    override fun initializeViews() {
+        showToastLong(getStringExtra(ARGUMENT_USER_ID))
+    }
 
     override fun networkError() {}
 

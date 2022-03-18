@@ -3,6 +3,8 @@ package com.fachrizalmrsln.githubuserapp.data.remote.repository
 import com.fachrizalmrsln.githubuserapp.data.remote.IRemoteSource
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
+import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.utils.datetime.timeAgoTimestamp
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -30,6 +32,8 @@ class RemoteRepository @Inject constructor(
                             it.bio = detailUser.bio.checkNullOrEmpty()
                             it.location = detailUser.location.checkNullOrEmpty()
                             it.email = detailUser.email.checkNullOrEmpty()
+                            it.follower = detailUser.followers.checkNullOrEmpty()
+                            it.following = detailUser.following.checkNullOrEmpty()
                         }
                 }
                 emit(chunkedList[i])
@@ -37,9 +41,11 @@ class RemoteRepository @Inject constructor(
         }
     }
 
-    override suspend fun getDetailUser(userName: String): Flow<UserModel> {
+    override suspend fun getUserRepositories(userName: String): Flow<List<UserRepositories>> {
         return flow {
-            emit(remoteSource.getDetailUser(userName))
+            val data = remoteSource.getUserRepository(userName)
+            data.map { it.updated_at = it.updated_at.timeAgoTimestamp() }
+            emit(data)
         }
     }
 

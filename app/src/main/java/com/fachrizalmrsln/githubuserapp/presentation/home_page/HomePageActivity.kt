@@ -26,6 +26,17 @@ class HomePageActivity
     override fun initializeViews() {
         setupAdapter()
         searchListener()
+        eventLister()
+    }
+
+    override fun networkError() {
+        mViewModel.messageToUI.observe(this@HomePageActivity) {
+            showToastShort(it.toString())
+        }
+    }
+
+    override fun onSearchItemCLick(result: SearchItemModel) {
+        Toast.makeText(this, result.login, Toast.LENGTH_LONG).show()
     }
 
     private fun setupAdapter() {
@@ -64,8 +75,11 @@ class HomePageActivity
         }
     }
 
-    override fun onSearchItemCLick(result: SearchItemModel) {
-        Toast.makeText(this, result.login, Toast.LENGTH_LONG).show()
+    private fun eventLister() {
+        mViewModel.loadingStatus.observe(this) {
+            if (it) showToastShort("Loading")
+            else showToastShort("Done")
+        }
     }
 
 }

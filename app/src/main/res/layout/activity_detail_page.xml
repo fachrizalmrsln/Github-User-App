@@ -234,15 +234,27 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_repositories"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/cl_header"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_repositories" />
+        android:layout_alignParentBottom="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_repositories"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_repositories" />
+
+        <include
+            android:id="@+id/included_view_error"
+            layout="@layout/view_error"
+            android:visibility="gone" />
+
+    </FrameLayout>
 
 </RelativeLayout>

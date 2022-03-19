@@ -70,6 +70,11 @@
             tools:itemCount="1"
             tools:listitem="@layout/item_search_results" />
 
+        <include
+            android:id="@+id/included_view_error"
+            layout="@layout/view_error"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <View

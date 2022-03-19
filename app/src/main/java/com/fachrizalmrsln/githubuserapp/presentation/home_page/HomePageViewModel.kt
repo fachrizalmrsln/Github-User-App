@@ -3,6 +3,7 @@ package com.fachrizalmrsln.githubuserapp.presentation.home_page
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fachrizalmrsln.githubuserapp.base.BaseViewModel
+import com.fachrizalmrsln.githubuserapp.data.local.repository.ILocalRepository
 import com.fachrizalmrsln.githubuserapp.data.remote.repository.IRemoteRepository
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomePageViewModel @Inject constructor(
-    private val repository: IRemoteRepository
+    private val mRemoteRepo: IRemoteRepository,
+    private val mLocalRepo: ILocalRepository
 ) : BaseViewModel() {
 
     private var _mSearchResults = MutableLiveData<List<SearchItemModel>>()
@@ -25,7 +27,7 @@ class HomePageViewModel @Inject constructor(
         showLoading()
         restartJob(INITIAL)
         launch {
-            repository.getSearchUser(query)
+            mRemoteRepo.getSearchUser(query)
                 .catch {
                     _messageToUI.value = it.message
                     restartJob()

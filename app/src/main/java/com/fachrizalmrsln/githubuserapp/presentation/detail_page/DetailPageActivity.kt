@@ -3,6 +3,7 @@ package com.fachrizalmrsln.githubuserapp.presentation.detail_page
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fachrizalmrsln.githubuserapp.R
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityDetailPageBinding
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
@@ -11,6 +12,8 @@ import com.fachrizalmrsln.githubuserapp.utils.data.getParcelable
 import com.fachrizalmrsln.githubuserapp.utils.image.loadImage
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
 import com.fachrizalmrsln.githubuserapp.utils.strings.isUserName
+import com.fachrizalmrsln.githubuserapp.utils.views.gone
+import com.fachrizalmrsln.githubuserapp.utils.views.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -40,6 +43,8 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
         initDataToUI()
 
         setupRecyclerView()
+
+        btnTryAgainClick()
     }
 
     private fun setupRecyclerView() = with(mBinding) {
@@ -52,13 +57,16 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
     }
 
     override fun networkError() {
-        mViewModel.messageToUI.observe(this@DetailPageActivity) {
-            showToastLong(it.toString())
+        mViewModel.messageToUI.observe(this) {
+            when {
+                it.contains(getString(R.string.no_connection_error)) -> showErrorUI()
+                else -> showToastLong(it)
+            }
         }
     }
 
     private fun getData() {
-        mData = getParcelable(ARGUMENT_USER_DETAIL)
+        mData = mData ?: getParcelable(ARGUMENT_USER_DETAIL)
         launch {
             mData?.login?.let { mViewModel.getUserRepositories(it) }
         }
@@ -84,6 +92,23 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
             tvLocation.text = it.location.checkNullOrEmpty()
             tvEmail.text = it.email.checkNullOrEmpty()
         }
+    }
+
+    private fun btnTryAgainClick() = with(mBinding) {
+        includedViewError.btnTryAgain.setOnClickListener {
+            hideErrorUI()
+            getData()
+        }
+    }
+
+    private fun showErrorUI() = with(mBinding) {
+        includedViewError.rlContainer.visible()
+        rvRepositories.gone()
+    }
+
+    private fun hideErrorUI() = with(mBinding) {
+        includedViewError.rlContainer.gone()
+        rvRepositories.visible()
     }
 
 }

@@ -8,3 +8,5 @@ fun Activity.getParcelable(key: String) = this.intent.getParcelableExtra<SearchI
 fun <T> List<T>.chunkedList(chuckedBy: Int): List<List<T>> {
     return chunked(if (this.size > chuckedBy) chuckedBy else this.size)
 }
+
+fun Activity.getStringID(stringID: Int) = resources.getString(stringID)

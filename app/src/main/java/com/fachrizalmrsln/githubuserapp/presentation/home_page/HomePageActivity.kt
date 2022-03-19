@@ -10,7 +10,6 @@ import com.fachrizalmrsln.githubuserapp.databinding.ActivityHomePageBinding
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.navigation.navigateToDetail
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.adapter.AdapterSearchResults
-import com.fachrizalmrsln.githubuserapp.utils.data.getStringID
 import com.fachrizalmrsln.githubuserapp.utils.views.gone
 import com.fachrizalmrsln.githubuserapp.utils.views.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,8 +44,8 @@ class HomePageActivity
     override fun networkError() {
         mViewModel.messageToUI.observe(this@HomePageActivity) {
             when {
-                it.contains(getStringID(R.string.no_connection_error)) -> showErrorUI()
-                it.contains(getStringID(R.string.no_results_error)) -> {
+                it.contains(getString(R.string.no_connection_error)) -> showErrorUI()
+                it.contains(getString(R.string.no_results_error)) -> {
                     hideSearchResultsContainer()
                     showToastLong(String.format(getString(R.string.search_not_found), mQuery))
                 }

@@ -72,8 +72,7 @@
 
         <include
             android:id="@+id/included_view_error"
-            layout="@layout/view_error"
-            android:visibility="gone" />
+            layout="@layout/view_error" />
 
     </LinearLayout>
 

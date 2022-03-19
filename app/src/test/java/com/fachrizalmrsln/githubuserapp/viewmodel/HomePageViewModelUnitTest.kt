@@ -73,7 +73,7 @@ class HomePageViewModelUnitTest {
 
             Mockito.verify(mObserver).onChanged(captor.capture())
             assertEquals(0, captor.value.size)
-            assertEquals("fachrizalmrsln", captor.value[0].login)
+            assertEquals(mQuery, captor.value[0].login)
             assertEquals(mDataExpected, captor.value[0])
         }
     }

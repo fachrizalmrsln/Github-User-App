@@ -65,6 +65,8 @@ dependencies {
     def hilt_compiler_version = '1.0.0'
     def circle_imageView_version = '3.1.0'
     def mockitoTest_version = '3.6.0'
+    def testRules_version = "1.4.0"
+    def coreTesting_version = "2.1.0"
 
     // default imported by android studio
     implementation "androidx.core:core-ktx:$ktx_version"
@@ -101,8 +103,12 @@ dependencies {
     implementation "de.hdodenhof:circleimageview:$circle_imageView_version"
 
     // testing
-    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    implementation "androidx.test.espresso:espresso-contrib:$espressoCore_version"
+    testImplementation "androidx.arch.core:core-testing:$coreTesting_version"
     testImplementation "org.mockito:mockito-inline:$mockitoTest_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    androidTestImplementation "androidx.test:rules:$testRules_version"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    androidTestImplementation "androidx.test:runner:$testRules_version"
+    androidTestImplementation "androidx.test:core-ktx:$testRules_version"
 }

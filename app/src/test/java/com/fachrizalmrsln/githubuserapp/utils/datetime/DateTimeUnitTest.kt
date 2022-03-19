@@ -1,8 +1,5 @@
-package com.fachrizalmrsln.githubuserapp.datetime
+package com.fachrizalmrsln.githubuserapp.utils.datetime
 
-import com.fachrizalmrsln.githubuserapp.utils.datetime.convertTimeStamp
-import com.fachrizalmrsln.githubuserapp.utils.datetime.formatDateAndTime
-import com.fachrizalmrsln.githubuserapp.utils.datetime.timeAgoTimestamp
 import org.junit.Assert.*
 import org.junit.Test
 import java.text.ParseException

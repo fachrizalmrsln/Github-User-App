@@ -58,4 +58,30 @@ class StringsUnitTest {
         assertNotEquals(mExpectedData2, mResult2)
     }
 
+    @Test
+    fun checkNullOrEmptyInt_isCorrect() {
+        val mGivenData1 = 12
+        val mExpectedData1 = "12"
+        val mResult1 = mGivenData1.checkNullOrEmpty()
+        assertEquals(mExpectedData1, mResult1)
+
+        val mGivenData2: Int? = null
+        val mExpectedData2 = "0"
+        val mResult2 = mGivenData2.checkNullOrEmpty()
+        assertEquals(mExpectedData2, mResult2)
+    }
+
+    @Test
+    fun checkNullOrEmptyInt_isInCorrect() {
+        val mGivenData1 = 12
+        val mExpectedData1 = 12
+        val mResult1 = mGivenData1.checkNullOrEmpty()
+        assertNotEquals(mExpectedData1, mResult1)
+
+        val mGivenData2: Int? = null
+        val mExpectedData2 = 0
+        val mResult2 = mGivenData2.checkNullOrEmpty()
+        assertNotEquals(mExpectedData2, mResult2)
+    }
+
 }

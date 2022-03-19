@@ -1,12 +1,13 @@
 package com.fachrizalmrsln.githubuserapp.presentation.home_page.holder
 
-import android.view.View
 import android.view.animation.Animation.INFINITE
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import androidx.recyclerview.widget.RecyclerView
 import com.fachrizalmrsln.githubuserapp.databinding.ItemLoadingListBinding
+import com.fachrizalmrsln.githubuserapp.utils.views.gone
+import com.fachrizalmrsln.githubuserapp.utils.views.visible
 
 class HolderLoading(
     private val mBinding: ItemLoadingListBinding
@@ -27,7 +28,7 @@ class HolderLoading(
             rotate.repeatCount = INFINITE
 
             ivLoading.startAnimation(rotate)
-            containerLoading.visibility = View.VISIBLE
+            containerLoading.visible()
         }
         else {
             ivLoading.clearAnimation()
@@ -35,7 +36,7 @@ class HolderLoading(
                 removeAllViews()
                 removeAllViewsInLayout()
                 removeView(this)
-                visibility = View.GONE
+                gone()
             }
         }
 

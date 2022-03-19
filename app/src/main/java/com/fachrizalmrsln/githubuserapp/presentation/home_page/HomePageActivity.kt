@@ -1,15 +1,18 @@
 package com.fachrizalmrsln.githubuserapp.presentation.home_page
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fachrizalmrsln.githubuserapp.R
 import com.fachrizalmrsln.githubuserapp.base.BaseActivity
 import com.fachrizalmrsln.githubuserapp.databinding.ActivityHomePageBinding
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.navigation.navigateToDetail
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.adapter.AdapterSearchResults
+import com.fachrizalmrsln.githubuserapp.utils.data.getStringID
+import com.fachrizalmrsln.githubuserapp.utils.views.gone
+import com.fachrizalmrsln.githubuserapp.utils.views.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -78,7 +81,7 @@ class HomePageActivity
 
     private fun eventLister() {
         mViewModel.loadingStatus.observe(this) {
-            if (it) mBinding.llSearchResults.visibility = View.VISIBLE
+            if (it) mBinding.llSearchResults.visible()
             mAdapter.loadingState(it)
         }
         mViewModel.mSearchResults.observe(this) { searchResults ->

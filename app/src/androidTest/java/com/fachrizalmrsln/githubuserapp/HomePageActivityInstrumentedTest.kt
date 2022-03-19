@@ -11,8 +11,12 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.fachrizalmrsln.githubuserapp.presentation.splash_screen.SplashScreen
+import com.fachrizalmrsln.githubuserapp.utils.constant.SPLASH_SCREEN_DURATION
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,24 +25,38 @@ import org.junit.runner.RunWith
 class HomePageActivityInstrumentedTest {
 
     @get: Rule
-    var activityTestRule = ActivityTestRule(SplashScreen::class.java)
+    var mActivityRule = ActivityTestRule(SplashScreen::class.java)
+
+    private val mMockWebServer = MockWebServer()
+
+    @Before
+    fun setup() {
+        mMockWebServer.start(8080)
+    }
 
     @Test
     fun actionSearchAndSelectItem() {
-        runBlocking { delay(3000L) }
-
+        waitForSplashScreen()
+        
         onView(withId(R.id.et_search))
             .check(matches(isCompletelyDisplayed()))
             .perform(click())
             .perform(typeText("Fachrizal"))
             .perform(pressImeActionButton())
-        runBlocking { delay(5000L) }
 
         onView(withId(R.id.rv_search))
             .check(matches(isCompletelyDisplayed()))
             .perform(scrollToPosition<RecyclerView.ViewHolder>(6))
             .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
-        runBlocking { delay(5000L) }
+    }
+
+    private fun waitForSplashScreen() = runBlocking {
+        delay(SPLASH_SCREEN_DURATION)
+    }
+
+    @After
+    fun teardown() {
+        mMockWebServer.shutdown()
     }
 
 }

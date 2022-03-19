@@ -4,6 +4,7 @@ import com.fachrizalmrsln.githubuserapp.data.remote.IRemoteSource
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.utils.data.chunkedList
 import com.fachrizalmrsln.githubuserapp.utils.datetime.timeAgoTimestamp
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
 import kotlinx.coroutines.flow.Flow
@@ -19,8 +20,7 @@ class RemoteRepository @Inject constructor(
         var detailUser: UserModel
         return flow {
             searchResults = remoteSource.getSearchUser(query).items
-            val resultsSize = searchResults.size
-            val chunkedList = searchResults.chunked(if (resultsSize > 3) 3 else resultsSize)
+            val chunkedList = searchResults.chunkedList(3)
             for (i in chunkedList.indices) {
                 chunkedList[i].forEach { searchItem ->
                     val userName = searchItem.login

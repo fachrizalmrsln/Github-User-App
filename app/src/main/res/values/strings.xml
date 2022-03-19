@@ -19,4 +19,7 @@
     <string name="updated_15_hours_ago">Updated 15 hours ago</string>
     <string name="ups_nsomething_went_wrong">Ups. . . \nSomething went wrong</string>
     <string name="try_again">Try Again</string>
+    <string name="no_connection_error">Unable to resolve host \"api.github.com\"</string>
+    <string name="no_results_error">size 0 must be greater than zero.</string>
+    <string name="search_not_found">Search for %s not found</string>
 </resources>

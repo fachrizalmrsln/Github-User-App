@@ -17,4 +17,6 @@
     <string name="followers">Followers</string>
     <string name="following">Following</string>
     <string name="updated_15_hours_ago">Updated 15 hours ago</string>
+    <string name="ups_nsomething_went_wrong">Ups. . . \nSomething went wrong</string>
+    <string name="try_again">Try Again</string>
 </resources>

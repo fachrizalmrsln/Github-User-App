@@ -13,7 +13,7 @@ class DateTimeUnitTest {
         val mDateTimeGiven = "2020-05-23T19:08:43Z"
         val mDateExpected = 1590232123000
         val mResult = mDateTimeGiven.formatDateAndTime()
-        assertNotEquals(mDateExpected, mResult)
+        assertEquals(mDateExpected, mResult)
     }
 
     @Test

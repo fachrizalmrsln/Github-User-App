@@ -23,8 +23,7 @@ class RemoteRepository @Inject constructor(
             val chunkedList = searchResults.chunkedList(3)
             for (i in chunkedList.indices) {
                 chunkedList[i].forEach { searchItem ->
-                    val userName = searchItem.login
-                    detailUser = remoteSource.getDetailUser(userName)
+                    detailUser = remoteSource.getDetailUser(searchItem.login)
                     chunkedList[i]
                         .filter { it.login == searchItem.login }
                         .map {

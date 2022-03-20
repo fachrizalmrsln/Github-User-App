@@ -32,7 +32,6 @@ class HomePageActivityInstrumentedTest {
     private lateinit var userDao: ILocalSource
     private lateinit var db: DatabaseInstance
 
-
     @get: Rule
     var mActivityRule = ActivityTestRule(SplashScreen::class.java)
 

@@ -63,7 +63,6 @@ class DetailPageActivityInstrumentedTest {
         onView(withId(R.id.rv_repositories))
             .check(matches(isCompletelyDisplayed()))
             .perform(scrollToPosition<RecyclerView.ViewHolder>(19))
-            .perform(actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
     }
 
     @Test

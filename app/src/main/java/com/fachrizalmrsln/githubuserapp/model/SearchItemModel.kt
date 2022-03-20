@@ -9,7 +9,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "search_history_table")
 data class SearchItemModel(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val primaryKey: Int,
     @ColumnInfo(name = "id_user_search")
     var id: Int,
     @ColumnInfo(name = "_querySearchID")

@@ -5,6 +5,8 @@ import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import com.fachrizalmrsln.githubuserapp.utils.datetime.timeAgoTimestamp
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RemoteRepository @Inject constructor(
@@ -12,20 +14,26 @@ class RemoteRepository @Inject constructor(
 ) : IRemoteRepository {
 
     override suspend fun getSearchUser(query: String): List<SearchItemModel> {
-        return remoteSource.getSearchUser(query).items
+        return withContext(Dispatchers.IO) {
+            remoteSource.getSearchUser(query).items
+        }
     }
 
     override suspend fun getDetailUser(userName: String): UserModel {
-        return remoteSource.getDetailUser(userName)
+        return withContext(Dispatchers.IO) {
+            remoteSource.getDetailUser(userName)
+        }
     }
 
     override suspend fun getUserRepositories(userName: String): List<UserRepositoriesModel> {
-        val data = remoteSource.getUserRepository(userName)
-        data.map {
-            it.updated_at = it.updated_at.timeAgoTimestamp()
-            it.avatar_url = it.owner.avatar_url
+        return withContext(Dispatchers.IO) {
+            val data = remoteSource.getUserRepository(userName)
+            data.map {
+                it.updated_at = it.updated_at.timeAgoTimestamp()
+                it.avatar_url = it.owner.avatar_url
+            }
+            data
         }
-        return data
     }
 
 }

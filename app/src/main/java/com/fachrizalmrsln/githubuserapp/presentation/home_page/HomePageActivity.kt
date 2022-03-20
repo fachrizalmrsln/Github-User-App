@@ -84,6 +84,7 @@ class HomePageActivity
     }
 
     private fun searchUser(query: String) {
+        hideErrorUI()
         mQuery = query
         launch {
             mAdapter.clearData()

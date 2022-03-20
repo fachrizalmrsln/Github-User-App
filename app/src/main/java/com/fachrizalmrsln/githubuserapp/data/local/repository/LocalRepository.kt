@@ -13,7 +13,7 @@ class LocalRepository @Inject constructor(
         mDao.saveSearchDataHistory(dataSearch)
     }
 
-    override suspend fun saveRepositories(dataRepositories: UserRepositories) {
+    override suspend fun saveRepositories(dataRepositories: List<UserRepositories>) {
         mDao.saveRepositories(dataRepositories)
     }
 
@@ -21,8 +21,8 @@ class LocalRepository @Inject constructor(
         return mDao.getSearchDataHistory(query)
     }
 
-    override suspend fun getRepositories(): List<UserRepositories> {
-        return mDao.getRepositories()
+    override suspend fun getRepositories(userName: String): List<UserRepositories> {
+        return mDao.getRepositories(userName)
     }
 
 }

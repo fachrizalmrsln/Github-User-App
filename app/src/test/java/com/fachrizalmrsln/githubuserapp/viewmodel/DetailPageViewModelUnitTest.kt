@@ -3,7 +3,7 @@ package com.fachrizalmrsln.githubuserapp.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.fachrizalmrsln.githubuserapp.CoroutineTestRule
-import com.fachrizalmrsln.githubuserapp.data.remote.repository.RemoteRepository
+import com.fachrizalmrsln.githubuserapp.data.usecase.UseCase
 import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import com.fachrizalmrsln.githubuserapp.presentation.detail_page.DetailPageViewModel
@@ -35,7 +35,7 @@ class DetailPageViewModelUnitTest {
     private lateinit var mViewModel: DetailPageViewModel
 
     @Mock
-    private lateinit var mRepository: RemoteRepository
+    private lateinit var mUseCase: UseCase
 
     @Mock
     private lateinit var mResponse: List<UserRepositoriesModel>
@@ -46,7 +46,7 @@ class DetailPageViewModelUnitTest {
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        mViewModel = DetailPageViewModel(mRepository)
+        mViewModel = DetailPageViewModel(mUseCase)
     }
 
     @Test
@@ -66,13 +66,14 @@ class DetailPageViewModelUnitTest {
                 email = "fachrizalmrsln@gmail.com",
                 following = 26,
                 followers = 3,
-                name = "Fachrizal Mursalin"
+                name = "Fachrizal Mursalin",
+                login = "fachrizalmrsln"
             )
         )
         runBlocking {
             val flow = flow { emit(mResponse) }
 
-            `when`(mRepository.getUserRepositories(mQuery)).thenReturn(flow)
+            `when`(mUseCase.getUserRepositories(mQuery)).thenReturn(flow)
             `when`(mResponse[0]).thenReturn(mDataExpected)
 
             mViewModel.getUserRepositories(mQuery)
@@ -102,13 +103,14 @@ class DetailPageViewModelUnitTest {
                 email = "fachrizalmrsln@gmail.com",
                 following = 26,
                 followers = 3,
-                name = "Fachrizal Mursalin"
+                name = "Fachrizal Mursalin",
+                login = "fachrizalmrsln"
             )
         )
         runBlocking {
             val flow = flow { emit(mResponse) }
 
-            `when`(mRepository.getUserRepositories(mQuery)).thenReturn(flow)
+            `when`(mUseCase.getUserRepositories(mQuery)).thenReturn(flow)
             `when`(mResponse[0]).thenReturn(mDataExpected)
 
             mViewModel.getUserRepositories(mQuery)

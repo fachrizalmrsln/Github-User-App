@@ -3,6 +3,8 @@ package com.fachrizalmrsln.githubuserapp.data.local.repository
 import com.fachrizalmrsln.githubuserapp.data.local.IDatabaseObject
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class LocalRepository @Inject constructor(
@@ -17,8 +19,10 @@ class LocalRepository @Inject constructor(
         mDao.saveRepositories(dataRepositories)
     }
 
-    override suspend fun getSearchHistory(): List<SearchItemModel> {
-        return mDao.getSearchHistory()
+    override suspend fun getSearchHistory(): Flow<List<SearchItemModel>> {
+        return flow {
+            emit(mDao.getSearchHistory())
+        }
     }
 
     override suspend fun getRepositories(): List<UserRepositories> {

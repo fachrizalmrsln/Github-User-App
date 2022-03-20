@@ -21,8 +21,12 @@ class UseCase @Inject constructor(
         val cacheData = localRepository.getSearchQuery(query)
         return if (cacheData == null) getFreshData(query)
         else {
-            val data = localRepository.getSearchHistory()
-            flow { data.map { emit(it.items) } }
+            val data = localRepository.getSearchHistory(query)
+            flow {
+                data.map { searchItemModel ->
+                    emit(searchItemModel.items)
+                }
+            }
         }
     }
 

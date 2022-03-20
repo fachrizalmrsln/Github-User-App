@@ -2,7 +2,7 @@ package com.fachrizalmrsln.githubuserapp.data.remote.repository
 
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
-import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 
 interface IRemoteRepository {
 
@@ -10,6 +10,6 @@ interface IRemoteRepository {
 
     suspend fun getDetailUser(userName: String): UserModel
 
-    suspend fun getUserRepositories(userName: String): List<UserRepositories>
+    suspend fun getUserRepositories(userName: String): List<UserRepositoriesModel>
 
 }

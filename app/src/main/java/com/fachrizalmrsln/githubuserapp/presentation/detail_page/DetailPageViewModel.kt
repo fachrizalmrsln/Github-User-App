@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fachrizalmrsln.githubuserapp.base.BaseViewModel
 import com.fachrizalmrsln.githubuserapp.data.usecase.IUseCase
-import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.catch
@@ -17,8 +17,8 @@ class DetailPageViewModel @Inject constructor(
     private val mUseCase: IUseCase
 ) : BaseViewModel() {
 
-    private var _mUserRepositories = MutableLiveData<List<UserRepositories>>()
-    val mUserRepositories: LiveData<List<UserRepositories>>
+    private var _mUserRepositories = MutableLiveData<List<UserRepositoriesModel>>()
+    val mUserRepositories: LiveData<List<UserRepositoriesModel>>
         get() = _mUserRepositories
 
     suspend fun getUserRepositories(userName: String) {

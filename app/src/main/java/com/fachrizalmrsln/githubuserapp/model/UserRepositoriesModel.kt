@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_repositories_table")
-data class UserRepositories(
+data class UserRepositoriesModel(
     @PrimaryKey
     @ColumnInfo(name = "id_repositories_repositories")
     val id: Int,

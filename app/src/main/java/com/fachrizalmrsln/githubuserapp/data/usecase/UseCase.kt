@@ -4,7 +4,7 @@ import com.fachrizalmrsln.githubuserapp.data.local.repository.ILocalRepository
 import com.fachrizalmrsln.githubuserapp.data.remote.repository.IRemoteRepository
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
-import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import com.fachrizalmrsln.githubuserapp.utils.data.chunkedList
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +24,7 @@ class UseCase @Inject constructor(
         else flow { emit(cacheData) }
     }
 
-    override suspend fun getUserRepositories(userName: String): Flow<List<UserRepositories>> {
+    override suspend fun getUserRepositories(userName: String): Flow<List<UserRepositoriesModel>> {
         val cacheData = localRepository.getRepositories(userName)
         return flow {
             emit(
@@ -68,7 +68,7 @@ class UseCase @Inject constructor(
         withContext(Dispatchers.IO) { localRepository.saveSearchDataHistory(freshData) }
     }
 
-    private suspend fun saveRepositories(freshData: List<UserRepositories>) {
+    private suspend fun saveRepositories(freshData: List<UserRepositoriesModel>) {
         withContext(Dispatchers.IO) { localRepository.saveRepositories(freshData) }
     }
 

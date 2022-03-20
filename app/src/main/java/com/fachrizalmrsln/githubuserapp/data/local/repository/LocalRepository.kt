@@ -2,7 +2,7 @@ package com.fachrizalmrsln.githubuserapp.data.local.repository
 
 import com.fachrizalmrsln.githubuserapp.data.local.source.ILocalSource
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
-import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import javax.inject.Inject
 
 class LocalRepository @Inject constructor(
@@ -13,7 +13,7 @@ class LocalRepository @Inject constructor(
         mDao.saveSearchDataHistory(dataSearch)
     }
 
-    override suspend fun saveRepositories(dataRepositories: List<UserRepositories>) {
+    override suspend fun saveRepositories(dataRepositories: List<UserRepositoriesModel>) {
         mDao.saveRepositories(dataRepositories)
     }
 
@@ -21,7 +21,7 @@ class LocalRepository @Inject constructor(
         return mDao.getSearchDataHistory(query)
     }
 
-    override suspend fun getRepositories(userName: String): List<UserRepositories> {
+    override suspend fun getRepositories(userName: String): List<UserRepositoriesModel> {
         return mDao.getRepositories(userName)
     }
 

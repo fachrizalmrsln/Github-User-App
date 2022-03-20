@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fachrizalmrsln.githubuserapp.databinding.ItemLoadingListBinding
 import com.fachrizalmrsln.githubuserapp.databinding.ItemNoSpaceBinding
 import com.fachrizalmrsln.githubuserapp.databinding.ItemRepositoriesBinding
-import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import com.fachrizalmrsln.githubuserapp.presentation.detail_page.holder.HolderUserRepositories
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.holder.HolderLoading
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.holder.HolderNoSpace
@@ -19,7 +19,7 @@ import com.fachrizalmrsln.githubuserapp.utils.constant.VIEW_TYPE_NO_SPACE
 class AdapterUserRepositories : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mLoadingState: Boolean = true
-    private var mDataList = mutableListOf<UserRepositories>()
+    private var mDataList = mutableListOf<UserRepositoriesModel>()
 
     fun loadingState(loadingState: Boolean) {
         mLoadingState = loadingState
@@ -29,7 +29,7 @@ class AdapterUserRepositories : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
         notifyDataSetChanged()
     }
     
-    fun insertData(data: List<UserRepositories>) {
+    fun insertData(data: List<UserRepositoriesModel>) {
         mDataList.apply {
             addAll(size, data)
         }

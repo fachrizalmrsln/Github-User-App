@@ -1,7 +1,7 @@
 package com.fachrizalmrsln.githubuserapp.base
 
 import com.fachrizalmrsln.githubuserapp.BuildConfig
-import com.fachrizalmrsln.githubuserapp.data.remote.IRemoteSource
+import com.fachrizalmrsln.githubuserapp.data.remote.source.IRemoteSource
 import com.fachrizalmrsln.githubuserapp.utils.constant.AUTHORIZATION
 import com.fachrizalmrsln.githubuserapp.utils.constant.BASE_URL
 import com.fachrizalmrsln.githubuserapp.utils.typeadapter.TypeInteger

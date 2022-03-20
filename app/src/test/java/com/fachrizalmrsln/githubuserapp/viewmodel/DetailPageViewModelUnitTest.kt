@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.fachrizalmrsln.githubuserapp.CoroutineTestRule
 import com.fachrizalmrsln.githubuserapp.data.remote.repository.RemoteRepository
 import com.fachrizalmrsln.githubuserapp.model.UserModel
-import com.fachrizalmrsln.githubuserapp.model.UserRepositories
+import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import com.fachrizalmrsln.githubuserapp.presentation.detail_page.DetailPageViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -31,17 +31,17 @@ class DetailPageViewModelUnitTest {
     val coroutineScope = CoroutineTestRule()
 
     @Mock
-    private lateinit var mObserver: Observer<List<UserRepositories>>
+    private lateinit var mObserver: Observer<List<UserRepositoriesModel>>
     private lateinit var mViewModel: DetailPageViewModel
 
     @Mock
     private lateinit var mRepository: RemoteRepository
 
     @Mock
-    private lateinit var mResponse: List<UserRepositories>
+    private lateinit var mResponse: List<UserRepositoriesModel>
 
     @Captor
-    private lateinit var captor: ArgumentCaptor<List<UserRepositories>>
+    private lateinit var captor: ArgumentCaptor<List<UserRepositoriesModel>>
 
     @Before
     fun setup() {
@@ -52,7 +52,7 @@ class DetailPageViewModelUnitTest {
     @Test
     fun getSearchUser_isCorrect() {
         val mQuery = "fachrizalmrsln"
-        val mDataExpected = UserRepositories(
+        val mDataExpected = UserRepositoriesModel(
             id = 223750327,
             avatar_url = "https://avatars.githubusercontent.com/u/28893080?v=4",
             name = "Beautiful-Place-App",
@@ -88,7 +88,7 @@ class DetailPageViewModelUnitTest {
     @Test
     fun getSearchUser_isInCorrect() {
         val mQuery = "fachrizalmrsln"
-        val mDataExpected = UserRepositories(
+        val mDataExpected = UserRepositoriesModel(
             id = 111111,
             avatar_url = "https://avatars.githubusercontent.com/u/28893080?v=4",
             name = "Beautiful-Place-App",

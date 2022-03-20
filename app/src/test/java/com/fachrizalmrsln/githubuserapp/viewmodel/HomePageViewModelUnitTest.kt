@@ -3,7 +3,7 @@ package com.fachrizalmrsln.githubuserapp.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.fachrizalmrsln.githubuserapp.CoroutineTestRule
-import com.fachrizalmrsln.githubuserapp.data.remote.repository.RemoteRepository
+import com.fachrizalmrsln.githubuserapp.data.usecase.UseCase
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.presentation.home_page.HomePageViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,7 +34,7 @@ class HomePageViewModelUnitTest {
     private lateinit var mViewModel: HomePageViewModel
 
     @Mock
-    private lateinit var mRepository: RemoteRepository
+    private lateinit var mUseCase: UseCase
 
     @Mock
     private lateinit var mResponse: List<SearchItemModel>
@@ -45,7 +45,7 @@ class HomePageViewModelUnitTest {
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
-        mViewModel = HomePageViewModel(mRepository)
+        mViewModel = HomePageViewModel(mUseCase)
     }
 
     @Test
@@ -60,12 +60,14 @@ class HomePageViewModelUnitTest {
             location = "South Jakarta, Jakarta, Indonesia",
             email = "fachrizalmrsln@gmail.com",
             follower = "3",
-            following = "26"
+            following = "26",
+            primaryKey = 12312,
+            _querySearchID = "fachrizalmrsln"
         )
         runBlocking {
             val flow = flow { emit(mResponse) }
 
-            `when`(mRepository.getSearchUser(mQuery)).thenReturn(flow)
+            `when`(mUseCase.getSearchUser(mQuery)).thenReturn(flow)
             `when`(mResponse[0]).thenReturn(mDataExpected)
 
             mViewModel.searchUser(mQuery)
@@ -90,12 +92,14 @@ class HomePageViewModelUnitTest {
             location = "South Jakarta, Jakarta, Indonesia",
             email = "fachrizalmrsln@gmail.com",
             follower = "3",
-            following = "26"
+            following = "26",
+            primaryKey = 12312,
+            _querySearchID = "fachrizalmrsln"
         )
         runBlocking {
             val flow = flow { emit(mResponse) }
 
-            `when`(mRepository.getSearchUser(mQuery)).thenReturn(flow)
+            `when`(mUseCase.getSearchUser(mQuery)).thenReturn(flow)
             `when`(mResponse[0]).thenReturn(mDataExpected)
 
             mViewModel.searchUser(mQuery)

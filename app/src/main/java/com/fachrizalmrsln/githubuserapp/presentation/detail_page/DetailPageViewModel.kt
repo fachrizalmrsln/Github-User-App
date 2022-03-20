@@ -3,8 +3,7 @@ package com.fachrizalmrsln.githubuserapp.presentation.detail_page
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fachrizalmrsln.githubuserapp.base.BaseViewModel
-import com.fachrizalmrsln.githubuserapp.data.local.repository.ILocalRepository
-import com.fachrizalmrsln.githubuserapp.data.remote.repository.IRemoteRepository
+import com.fachrizalmrsln.githubuserapp.data.usecase.UseCase
 import com.fachrizalmrsln.githubuserapp.model.UserRepositories
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.cancellable
@@ -15,8 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailPageViewModel @Inject constructor(
-    private val mRemoteRepo: IRemoteRepository,
-    private val mLocalRepo: ILocalRepository
+    private val mUseCase: UseCase
 ) : BaseViewModel() {
 
     private var _mUserRepositories = MutableLiveData<List<UserRepositories>>()
@@ -27,7 +25,7 @@ class DetailPageViewModel @Inject constructor(
         showLoading()
         restartJob(INITIAL)
         launch {
-            mRemoteRepo.getUserRepositories(userName)
+            mUseCase.getUserRepositories(userName)
                 .catch {
                     _messageToUI.value = it.message
                     restartJob()

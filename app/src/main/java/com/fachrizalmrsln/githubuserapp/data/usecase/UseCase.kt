@@ -1,7 +1,7 @@
 package com.fachrizalmrsln.githubuserapp.data.usecase
 
-import com.fachrizalmrsln.githubuserapp.data.local.repository.LocalRepository
-import com.fachrizalmrsln.githubuserapp.data.remote.repository.RemoteRepository
+import com.fachrizalmrsln.githubuserapp.data.local.repository.ILocalRepository
+import com.fachrizalmrsln.githubuserapp.data.remote.repository.IRemoteRepository
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.model.UserRepositories
@@ -14,8 +14,8 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class UseCase @Inject constructor(
-    private val remoteRepository: RemoteRepository,
-    private val localRepository: LocalRepository
+    private val remoteRepository: IRemoteRepository,
+    private val localRepository: ILocalRepository
 ) : IUseCase {
 
     override suspend fun getSearchUser(query: String): Flow<List<SearchItemModel>> {
@@ -25,7 +25,17 @@ class UseCase @Inject constructor(
     }
 
     override suspend fun getUserRepositories(userName: String): Flow<List<UserRepositories>> {
-        return flow { emit(remoteRepository.getUserRepositories(userName)) }
+        val cacheData = localRepository.getRepositories(userName)
+        return flow {
+            emit(
+                if (cacheData.isNullOrEmpty()) {
+                    val freshData = remoteRepository.getUserRepositories(userName)
+                    saveRepositories(freshData)
+                    freshData
+                }
+                else cacheData
+            )
+        }
     }
 
     private suspend fun getFreshData(query: String): Flow<List<SearchItemModel>> {
@@ -56,6 +66,10 @@ class UseCase @Inject constructor(
 
     private suspend fun saveFreshDataToLocal(freshData: List<SearchItemModel>) {
         withContext(Dispatchers.IO) { localRepository.saveSearchDataHistory(freshData) }
+    }
+
+    private suspend fun saveRepositories(freshData: List<UserRepositories>) {
+        withContext(Dispatchers.IO) { localRepository.saveRepositories(freshData) }
     }
 
 }

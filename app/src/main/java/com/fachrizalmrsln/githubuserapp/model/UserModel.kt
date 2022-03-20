@@ -3,6 +3,8 @@ package com.fachrizalmrsln.githubuserapp.model
 import androidx.room.ColumnInfo
 
 data class UserModel(
+    @ColumnInfo(name = "user_name_user_user")
+    val login: String?,
     @ColumnInfo(name = "image_user_user")
     val avatar_url: String?,
     @ColumnInfo(name = "bio_user_user")

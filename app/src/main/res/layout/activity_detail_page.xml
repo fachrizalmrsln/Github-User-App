@@ -88,10 +88,11 @@
             app:layout_constraintTop_toBottomOf="@id/tv_about">
 
             <ImageView
+                android:id="@+id/iv_follower"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
                 android:alpha="0.7"
-                android:src="@drawable/ic_follower"
+                tools:src="@drawable/ic_follower"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -163,11 +164,12 @@
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
+                android:id="@+id/iv_location"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_2"
                 android:alpha="0.7"
-                android:src="@drawable/ic_location"
+                tools:src="@drawable/ic_location"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -200,12 +202,13 @@
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
+                android:id="@+id/iv_email"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginBottom="@dimen/dp_2"
                 android:alpha="0.7"
-                android:src="@drawable/ic_email"
+                tools:src="@drawable/ic_email"
                 tools:ignore="ContentDescription" />
 
             <TextView

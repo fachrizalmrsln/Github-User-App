@@ -13,6 +13,7 @@ import com.fachrizalmrsln.githubuserapp.utils.image.loadImage
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
 import com.fachrizalmrsln.githubuserapp.utils.strings.isUserName
 import com.fachrizalmrsln.githubuserapp.utils.views.gone
+import com.fachrizalmrsln.githubuserapp.utils.views.loadDrawable
 import com.fachrizalmrsln.githubuserapp.utils.views.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -84,6 +85,9 @@ class DetailPageActivity : BaseActivity<ActivityDetailPageBinding>() {
     private fun initDataToUI() = with(mBinding) {
         mData?.let {
             ivImage.loadImage(this@DetailPageActivity, it.avatar_url)
+            ivFollower.loadImage(this@DetailPageActivity, loadDrawable(R.drawable.ic_follower))
+            ivLocation.loadImage(this@DetailPageActivity, loadDrawable(R.drawable.ic_location))
+            ivEmail.loadImage(this@DetailPageActivity, loadDrawable(R.drawable.ic_email))
             tvName.text = it.user_full_name.checkNullOrEmpty()
             tvUserName.text = it.login.isUserName()
             tvAbout.text = it.bio.checkNullOrEmpty()

@@ -3,7 +3,7 @@ package com.fachrizalmrsln.githubuserapp.presentation.detail_page
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.fachrizalmrsln.githubuserapp.base.BaseViewModel
-import com.fachrizalmrsln.githubuserapp.data.usecase.UseCase
+import com.fachrizalmrsln.githubuserapp.data.usecase.IUseCase
 import com.fachrizalmrsln.githubuserapp.model.UserRepositories
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.cancellable
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailPageViewModel @Inject constructor(
-    private val mUseCase: UseCase
+    private val mUseCase: IUseCase
 ) : BaseViewModel() {
 
     private var _mUserRepositories = MutableLiveData<List<UserRepositories>>()

@@ -2,6 +2,7 @@ package com.fachrizalmrsln.githubuserapp.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.Query
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
 import com.fachrizalmrsln.githubuserapp.model.UserRepositories
@@ -9,10 +10,10 @@ import com.fachrizalmrsln.githubuserapp.model.UserRepositories
 @Dao
 interface IDatabaseObject {
 
-    @Insert
+    @Insert(onConflict = IGNORE)
     suspend fun saveSearchHistory(dataSearch: SearchItemModel)
 
-    @Insert
+    @Insert(onConflict = IGNORE)
     suspend fun saveRepositories(dataRepositories: UserRepositories)
 
     @Query("SELECT * FROM search_history_table")

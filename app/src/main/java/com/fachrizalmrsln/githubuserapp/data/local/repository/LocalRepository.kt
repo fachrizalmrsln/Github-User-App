@@ -37,15 +37,9 @@ class LocalRepository @Inject constructor(
         }
     }
 
-    override suspend fun getSearchHistory(): List<SearchRoomResultModel> {
+    override suspend fun getSearchHistory(query: String): List<SearchRoomResultModel> {
         return withContext(Dispatchers.IO) {
-            mDao.getSearchHistory()
-        }
-    }
-
-    override suspend fun getSearchDataHistory(query: String): List<SearchItemModel> {
-        return withContext(Dispatchers.IO) {
-            mDao.getSearchDataHistory(query)
+            mDao.getSearchHistory(query)
         }
     }
 

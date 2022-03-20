@@ -15,9 +15,7 @@ interface ILocalRepository {
 
     suspend fun getSearchQuery(query: String): SearchQueryModel?
 
-    suspend fun getSearchHistory(): List<SearchRoomResultModel>
-
-    suspend fun getSearchDataHistory(query: String): List<SearchItemModel>
+    suspend fun getSearchHistory(query: String): List<SearchRoomResultModel>
 
     suspend fun getRepositories(userName: String): List<UserRepositoriesModel>
 

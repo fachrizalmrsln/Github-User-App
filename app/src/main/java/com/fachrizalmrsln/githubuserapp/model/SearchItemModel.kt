@@ -12,6 +12,8 @@ data class SearchItemModel(
     @PrimaryKey
     @ColumnInfo(name = "id_user_search")
     var id: Int,
+    @ColumnInfo(name = "_querySearchID")
+    var _querySearchID: String,
     @ColumnInfo(name = "picture_user_search")
     var avatar_url: String,
     @ColumnInfo(name = "name_user_search")

@@ -3,11 +3,13 @@ package com.fachrizalmrsln.githubuserapp.app
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.fachrizalmrsln.githubuserapp.data.local.database.DatabaseInstance
 import com.fachrizalmrsln.githubuserapp.data.local.repository.ILocalRepository
 import com.fachrizalmrsln.githubuserapp.data.local.repository.LocalRepository
+import com.fachrizalmrsln.githubuserapp.data.local.source.DatabaseInstance
 import com.fachrizalmrsln.githubuserapp.data.remote.repository.IRemoteRepository
 import com.fachrizalmrsln.githubuserapp.data.remote.repository.RemoteRepository
+import com.fachrizalmrsln.githubuserapp.data.usecase.IUseCase
+import com.fachrizalmrsln.githubuserapp.data.usecase.UseCase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -22,7 +24,7 @@ class GitHubUserAppApplication: Application()
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class GitHubUserAppModule {
+abstract class BindsModule {
 
     @Binds
     @Singleton
@@ -36,11 +38,17 @@ abstract class GitHubUserAppModule {
         localRepository: LocalRepository
     ): ILocalRepository
 
+    @Binds
+    @Singleton
+    abstract fun bindsUseCase(
+        repository: UseCase
+    ): IUseCase
+
 }
 
 @Module
 @InstallIn(SingletonComponent::class)
-object LocalDataModule {
+object ProvidesModule {
 
     @Provides
     @Singleton
@@ -54,6 +62,6 @@ object LocalDataModule {
 
     @Provides
     @Singleton
-    fun provideDatabaseInstance(db: DatabaseInstance) = db.databaseObject()
+    fun provideDatabaseInstance(database: DatabaseInstance) = database.databaseObject()
 
 }

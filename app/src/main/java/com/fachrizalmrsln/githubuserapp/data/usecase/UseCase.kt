@@ -3,14 +3,13 @@ package com.fachrizalmrsln.githubuserapp.data.usecase
 import com.fachrizalmrsln.githubuserapp.data.local.repository.ILocalRepository
 import com.fachrizalmrsln.githubuserapp.data.remote.repository.IRemoteRepository
 import com.fachrizalmrsln.githubuserapp.model.SearchItemModel
+import com.fachrizalmrsln.githubuserapp.model.SearchQueryModel
 import com.fachrizalmrsln.githubuserapp.model.UserModel
 import com.fachrizalmrsln.githubuserapp.model.UserRepositoriesModel
 import com.fachrizalmrsln.githubuserapp.utils.data.chunkedList
 import com.fachrizalmrsln.githubuserapp.utils.strings.checkNullOrEmpty
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class UseCase @Inject constructor(
@@ -19,9 +18,12 @@ class UseCase @Inject constructor(
 ) : IUseCase {
 
     override suspend fun getSearchUser(query: String): Flow<List<SearchItemModel>> {
-        val cacheData = localRepository.getSearchDataHistory(query)
-        return if (cacheData.isNullOrEmpty()) getFreshData(query)
-        else flow { emit(cacheData) }
+        val cacheData = localRepository.getSearchQuery(query)
+        return if (cacheData == null) getFreshData(query)
+        else {
+            val data = localRepository.getSearchHistory()
+            flow { data.map { emit(it.items) } }
+        }
     }
 
     override suspend fun getUserRepositories(userName: String): Flow<List<UserRepositoriesModel>> {
@@ -32,8 +34,7 @@ class UseCase @Inject constructor(
                     val freshData = remoteRepository.getUserRepositories(userName)
                     saveRepositories(freshData)
                     freshData
-                }
-                else cacheData
+                } else cacheData
             )
         }
     }
@@ -56,20 +57,22 @@ class UseCase @Inject constructor(
                             it.email = detailUser.email.checkNullOrEmpty()
                             it.follower = detailUser.followers.checkNullOrEmpty()
                             it.following = detailUser.following.checkNullOrEmpty()
+                            it._querySearchID = query
                         }
                 }
-                saveFreshDataToLocal(chunkedList[i])
+                saveFreshDataToLocal(query, chunkedList[i])
                 emit(chunkedList[i])
             }
         }
     }
 
-    private suspend fun saveFreshDataToLocal(freshData: List<SearchItemModel>) {
-        withContext(Dispatchers.IO) { localRepository.saveSearchDataHistory(freshData) }
+    private suspend fun saveFreshDataToLocal(dataQuery: String, freshData: List<SearchItemModel>) {
+        localRepository.saveSearchQuery(SearchQueryModel(dataQuery))
+        localRepository.saveSearchDataHistory(freshData)
     }
 
     private suspend fun saveRepositories(freshData: List<UserRepositoriesModel>) {
-        withContext(Dispatchers.IO) { localRepository.saveRepositories(freshData) }
+        localRepository.saveRepositories(freshData)
     }
 
 }

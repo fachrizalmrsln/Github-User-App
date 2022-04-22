@@ -55,6 +55,7 @@ class UseCase @Inject constructor(
                     chunkedList[i]
                         .filter { it.login == searchItem.login }
                         .map {
+                            it.primaryKey = detailUser.login.checkNullOrEmpty()
                             it.user_full_name = detailUser.name.checkNullOrEmpty()
                             it.bio = detailUser.bio.checkNullOrEmpty()
                             it.location = detailUser.location.checkNullOrEmpty()

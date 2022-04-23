@@ -61,7 +61,7 @@ class HomePageViewModelUnitTest {
             email = "fachrizalmrsln@gmail.com",
             follower = "3",
             following = "26",
-            primaryKey = 12312,
+            primaryKey = "12312",
             _querySearchID = "fachrizalmrsln"
         )
         runBlocking {
@@ -93,7 +93,7 @@ class HomePageViewModelUnitTest {
             email = "fachrizalmrsln@gmail.com",
             follower = "3",
             following = "26",
-            primaryKey = 12312,
+            primaryKey = "12312",
             _querySearchID = "fachrizalmrsln"
         )
         runBlocking {
